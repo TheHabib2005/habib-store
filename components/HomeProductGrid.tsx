@@ -25,9 +25,9 @@ const HomeProduct = () => {
                                     {HomeDisplayedProducts[0].title}
                                 </h3>
                                 <p className="flex-none rounded-full bg-blue-600 p-2 text-white">
-                                    ${HomeDisplayedProducts[0].price}
-                                    <span className="ml-1 inline hidden @[275px]/label:inline">
-                                        USD
+                                    ৳ {HomeDisplayedProducts[0].stringPrice}
+                                    <span className="ml-1 inline  @[275px]/label:inline">
+                                        BDT
                                     </span>
                                 </p>
                             </div>
