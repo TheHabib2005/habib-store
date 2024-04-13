@@ -12,7 +12,7 @@ const FilterWrapper = () => {
     const router = useRouter()
 
     return (
-        <div className='w-[25%] bg-[#1d1d1d] md:block hidden py-4  rounded-sm '>
+        <div className='w-[25%] bg-[#1d1d1d] md:block hidden py-4  rounded-sm  relative'>
             <div className='flex items-center justify-between px-4'>
                 <h1>Filters</h1>
                 <button className='text-sm text-neutral-300 hover:text-neutral-200' onClick={() => {

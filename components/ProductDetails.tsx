@@ -10,10 +10,10 @@ const ProductDetails: FC<Props> = (productId) => {
     console.log(currentProduct);
     const [currentDisplayimage, setCurrentDisplayImage] = useState(currentProduct.thumbnail)
     const [currentDisplayimageActive, setCurrentDisplayImageActive] = useState(0)
-
+    const [quantity, setQuantity] = useState(1)
 
     return (
-        <div className='flex gap-x-4'>
+        <div className='md:flex block gap-x-4'>
             <div className='w-[40%] p-2'>
                 <div className='w-full '>
                     <Image
@@ -57,6 +57,26 @@ const ProductDetails: FC<Props> = (productId) => {
                     <p className='capitalize'>Brand : {currentProduct.brand}</p>
 
                     <p>৳ {currentProduct.stringPrice}</p>
+
+                    <div className='flex items-center gap-x-8'>
+                        <span>Quantity</span>
+                        <div className='flex items-center gap-x-8'>
+                            <button className='w-[40px] h-[40px] flex items-center justify-center text-lg font-semibold rounded-sm cursor-pointer bg-[#1D1D1D] disabled:cursor-default  disabled:bg-gray-400'
+                                disabled={quantity > 1 ? false : true}
+                                onClick={() => setQuantity(prev => prev > 1 ? prev - 1 : prev)}
+                            >-</button>
+                            <span>{quantity}</span>
+                            <button className='w-[40px] h-[40px] flex items-center justify-center text-lg font-semibold rounded-sm cursor-pointer bg-[#1D1D1D] '
+                                onClick={() => setQuantity(prev => prev + 1)}
+                            >+</button>
+                        </div>
+                    </div>
+
+                    <div className='flex ml-4 gap-x-3 items-center relative mt-5'>
+                        <button className='w-[110px] bg-[#2562E7] p-3 rounded-sm'>add to cart</button>
+                        <button className='w-[110px] bg-[#D0611E] p-3 rounded-sm'>buy now</button>
+
+                    </div>
 
                 </div>
             </div>

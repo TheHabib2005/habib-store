@@ -9,7 +9,7 @@ interface PROPS {
 const Category: FC<PROPS> = ({ params }) => {
     return (
         <section>
-            <div className="flex px-4 py-5 min-w-full gap-x-4">
+            <div className="flex px-4 py-5 min-w-full gap-x-4 relative">
                 {/* filter bar */}
                 <FilterWrapper />
 
