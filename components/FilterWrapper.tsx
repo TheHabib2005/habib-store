@@ -17,6 +17,10 @@ const FilterWrapper = () => {
                 <h1>Filters</h1>
                 <button className='text-sm text-neutral-300 hover:text-neutral-200' onClick={() => {
                     router.replace(path)
+
+                    setTimeout(() => {
+                        window.location.reload()
+                    }, 100)
                 }}>CLEAR ALL</button>
             </div>
             <BrandLists />
