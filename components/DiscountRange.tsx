@@ -116,7 +116,7 @@ const DiscountRange = () => {
     // }, []);
 
 
-    const handleChange = (e, option, index) => {
+    const handleChange = (option) => {
         let updateselectedOption = option.value
         setSelectedDiscountOption(updateselectedOption)
         if (updateselectedOption !== "") {
@@ -142,12 +142,12 @@ const DiscountRange = () => {
                 <ul className='flex flex-col gap-y-3 my-3 px-2'>
                     {/* rendering a brands list */}
                     {
-                        discountRangeList.map((item, index) => {
+                        discountRangeList.map((item) => {
                             return <label htmlFor={item.name} key={item.id}
                                 className='flex items-center gap-x-4 cursor-pointer'
                             >
-                                <input onClick={(e) => {
-                                    handleChange(e, item, index)
+                                <input onClick={() => {
+                                    handleChange(item)
                                 }} type="checkbox" checked={item.value === selectedDiscountOption} name={item.name} id={item.name} />
                                 <span className='capitalize'>{item.name}</span>
                             </label>
