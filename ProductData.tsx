@@ -52,7 +52,7 @@ export const HomeDisplayedProducts: HomeDisplayedProductsTYPE[] = [
                 comment: "this is nice phone",
                 rating: 4.5,
             }
-        ],
+        ]
     },
     {
         id: Math.round(Math.random() * 100),
