@@ -116,7 +116,7 @@ const DiscountRange = () => {
     // }, []);
 
 
-    const handleChange = (option) => {
+    const handleChange = (option: any) => {
         let updateselectedOption = option.value
         setSelectedDiscountOption(updateselectedOption)
         if (updateselectedOption !== "") {
