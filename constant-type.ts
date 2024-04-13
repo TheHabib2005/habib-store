@@ -17,3 +17,9 @@ interface productReviewTYPE {
   comment: string;
   rating: number;
 }
+
+export interface smartPhoneBrandListTYPE {
+  id: number;
+  name: string;
+  isChecked: boolean;
+}
