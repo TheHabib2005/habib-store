@@ -13,7 +13,7 @@ const CategoryLists = () => {
                 {
                     categoryList.map(category => {
                         return (
-                            <Link href={`/product/${category.path}/`} key={category.id}>
+                            <Link href={`/products/${category.path}/`} key={category.id}>
                                 <div className='w-full h-[200px] py-5 bg-[#252424] rounded-md flex flex-col gap-5 items-center justify-center'>
                                     <Image
                                         src={category.imageUrl}
