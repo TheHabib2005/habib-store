@@ -27,7 +27,7 @@ const Header = () => {
             {/* left Links */}
             <div className='w-1/3 flex items-center md:justify-normal justify-center'>
 
-                <Link href={"/"} className='lg:text-xl font-semibold lg:block md:hidden sm:text-lg text-sm text-white'>HABIBs-STORE</Link>
+                <Link href={"/"} className='lg:text-xl font-semibold lg:block md:hidden sm:text-lg text-sm text-white'>HABIB-STORE</Link>
                 <Link href={"/"} className='text-md font-semibold lg:hidden md:block hidden'>HABIB</Link>
                 <div className=' items-center gap-5 ml-[30px] md:flex hidden'>
                     <Link href={"/about"} className='text-neutral-400  hover:text-white  text-sm hover:underline'>About</Link>
