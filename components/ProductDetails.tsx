@@ -32,11 +32,17 @@ const ProductDetails: FC<Props> = ({ productId }) => {
     const fetchProductById = async () => {
         try {
             setIsLoading(true);
-            const response = await axiosInstance.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products/singleProduct/`, JSON.stringify(productId))
-
-            setCurrentProduct(response.data[0])
+            const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products/singleProduct/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(productId),
+            })
+            const data = await response.json();
+            setCurrentProduct(data[0])
             setIsLoading(false);
-            setCurrentDisplayImage(response.data[0].thumbnail)
+            setCurrentDisplayImage(data[0].thumbnail)
         } catch (error) {
             setIsLoading(false);
             setError(error)

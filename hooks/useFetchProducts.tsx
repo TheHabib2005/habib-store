@@ -42,10 +42,17 @@ const FetchProducts = (category?: string) => {
     const fetchApi = async () => {
         try {
             setIsLoading(true);
-            const response = await axiosInstance.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products`, { query, sort });
+            const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products`, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ query, sort })
+            });
 
-            setApiResponse(response.data);
-            setProductsData(response.data.data)
+            const data = await response.json();
+            setApiResponse(data);
+            setProductsData(data.data)
             setIsLoading(false);
         } catch (error) {
             setIsLoading(false);
