@@ -45,14 +45,23 @@ const SelectSort = () => {
 
 
     }
+    document.addEventListener("click", (e: any) => {
 
+        if (e.target?.id === "sort-button") {
+            return
+        } else {
+            setIsOptionsOpen(false)
+        }
+
+
+    })
     return (
         <div className='relative sm:mt-0 mt-3 w-[180px]'>
             <div className='border border-neutral-600 py-2 px-3 rounded-sm cursor-pointer  text-sm select-none'
-                datatype='sort-button'
+                id='sort-button'
                 onClick={() => setIsOptionsOpen(!isoptionsOpen)}
             >
-                Sort By : <span className='capitalize'>{selectedOption}</span>
+                Sort By : <span className='capitalize' id='sort-button'>{selectedOption}</span>
             </div>
             {isoptionsOpen && <ul className='bg-black flex flex-col gap-y-2 p-2 rounded-sm  w-full absolute top-[120%] z-10 left-0'>
                 {
