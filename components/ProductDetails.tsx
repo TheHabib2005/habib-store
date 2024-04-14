@@ -73,7 +73,7 @@ const ProductDetails: FC<Props> = ({ productId }) => {
                         </div>
                         <div className='flex items-center mt-3 gap-x-3 w-full '>
                             {
-                                currentProduct?.images?.map((image, index) => {
+                                currentProduct?.images?.map((image: string, index: number) => {
                                     return <Image key={index}
                                         onClick={() => {
                                             setCurrentDisplayImage(image)
