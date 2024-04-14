@@ -2,18 +2,31 @@
 import { ProductsApi } from '@/ProductApi'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
-import React, { FC, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 import BreadGrum from './BreadGrum'
+import { useCartStore } from '@/zustand/useCartStore'
 interface Props {
     productId: string
 }
 const ProductDetails: FC<Props> = (productId) => {
     const [currentProduct] = useState(ProductsApi[0]);
-    console.log(currentProduct);
+    const { addToCart, cart, removeFromCart, updateQuantity } = useCartStore()
+    const isProudctInCart = () => {
+        return cart.find((item: any) => item.id === currentProduct.id)
+    }
     const [currentDisplayimage, setCurrentDisplayImage] = useState(currentProduct.thumbnail)
-    const [currentDisplayimageActive, setCurrentDisplayImageActive] = useState(0)
+    const [currentDisplayimageActive, setCurrentDisplayImageActive] = useState(1)
     const [quantity, setQuantity] = useState(1)
     const router = useRouter()
+
+    useEffect(() => {
+        if (cart.length > 0) {
+            setQuantity(isProudctInCart().quantity)
+        } else {
+            setQuantity(quantity)
+        }
+    }, [cart])
+
     return (
         <div className='lg:flex block gap-x-4'>
             <div className='lg:w-[40%] p-2'>
@@ -69,17 +82,42 @@ const ProductDetails: FC<Props> = (productId) => {
                         <div className='flex items-center gap-x-8'>
                             <button className='w-[40px] h-[40px] flex items-center justify-center text-lg font-semibold rounded-sm cursor-pointer bg-[#1D1D1D] disabled:cursor-default  disabled:bg-gray-400'
                                 disabled={quantity > 1 ? false : true}
-                                onClick={() => setQuantity(prev => prev > 1 ? prev - 1 : prev)}
+                                onClick={() => {
+                                    setQuantity(prev => prev - 1)
+                                    updateQuantity("decrement", currentProduct.id)
+
+                                }}
                             >-</button>
                             <span>{quantity}</span>
                             <button className='w-[40px] h-[40px] flex items-center justify-center text-lg font-semibold rounded-sm cursor-pointer bg-[#1D1D1D] '
-                                onClick={() => setQuantity(prev => prev + 1)}
+                                onClick={() => {
+                                    setQuantity(prev => prev + 1)
+                                    updateQuantity("increment", currentProduct.id)
+                                }}
                             >+</button>
                         </div>
                     </div>
 
                     <div className='flex  gap-x-10 items-center relative mt-5'>
-                        <button className='w-[170px] bg-[#2562E7] p-3 rounded-sm capitalize'>add to cart</button>
+                        {/* <button className='w-[170px] bg-[#2562E7] p-3 rounded-sm capitalize'
+                            onClick={() => {
+                                addToCart(currentProduct)
+                            }}
+                        >add to cart</button> */}
+
+                        {
+                            isProudctInCart() ? <button className='w-[220px] bg-orange-400 p-3 rounded-sm capitalize'
+                                onClick={() => {
+                                    removeFromCart(currentProduct.id)
+                                    setQuantity(1)
+                                }}
+                            >remove from CART </button> : <button className='w-[170px] bg-[#2562E7] p-3 rounded-sm capitalize'
+                                onClick={() => {
+                                    addToCart({ ...currentProduct, quantity: quantity })
+                                }}
+                            >add to cart</button>
+                        }
+
                         <button className='w-[170px] bg-[#D0611E] p-3 rounded-sm capitalize'>buy now</button>
 
                     </div>

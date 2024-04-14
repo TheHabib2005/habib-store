@@ -13,6 +13,22 @@ export interface ProductsTYPE {
   light_thumbnail: string;
   stringPrice: string;
 }
+export interface CartProductsTYPE {
+  id: number;
+  title: string;
+  price: number;
+  thumbnail: string;
+  description: string;
+  category: string;
+  brand: string;
+  stock: number;
+  rating: number;
+  reviews: productReviewTYPE[];
+  images: string[];
+  light_thumbnail: string;
+  stringPrice: string;
+  quantity: number;
+}
 
 interface productReviewTYPE {
   id: number;

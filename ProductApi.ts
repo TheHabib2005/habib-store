@@ -2,7 +2,7 @@ import { ProductsTYPE } from "./constant-type";
 
 export const ProductsApi: ProductsTYPE[] = [
   {
-    id: Math.round(Math.random() * 100),
+    id: 1,
     title: "iphone 15 Pro Max 256GB/512GB/1TB (USA-LL/A) Smartphone Unofficial",
     price: 174990,
     stringPrice: "174,990",

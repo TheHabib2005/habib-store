@@ -1,15 +1,17 @@
-import React, { FC } from 'react'
+"use client"
+import { useCartStore } from '@/zustand/useCartStore';
+import Link from 'next/link';
+import React, { FC, useEffect } from 'react'
 
-interface Props {
-    isCartBarOpen: boolean;
-    setIsCartBarOpen: React.Dispatch<React.SetStateAction<boolean>>
-}
 
-const CartBar: FC<Props> = ({ isCartBarOpen, setIsCartBarOpen }) => {
-
+const CartBar: FC = () => {
+    const { cart, setIsCartOpen, totalAmount, isCartOpen, removeFromCart, updateQuantity } = useCartStore()
+    useEffect(() => {
+        setIsCartOpen(false)
+    }, [])
     return (
-        <div className={`w-full  h-screen flex justify-between   fixed top-0 ${isCartBarOpen ? " right-0" : "right-[-100%]"}  z-10 transition-all duration-100 `}>
-            <div className='w-full bg-black/70 h-screen md:block hidden' onClick={() => setIsCartBarOpen(false)}>
+        <div className={`w-full  h-screen flex justify-between   fixed top-0 ${isCartOpen ? " right-0" : "right-[-100%]"}  z-10 transition-all duration-100 `}>
+            <div className='w-full bg-black/70 h-screen md:block hidden' onClick={() => setIsCartOpen(false)}>
 
             </div>
             <div
@@ -19,7 +21,7 @@ const CartBar: FC<Props> = ({ isCartBarOpen, setIsCartBarOpen }) => {
             >
                 <div className="flex items-center justify-between">
                     <p className="text-lg font-semibold">My Cart</p>
-                    <button aria-label="Close cart" onClick={() => setIsCartBarOpen(false)}>
+                    <button aria-label="Close cart" onClick={() => setIsCartOpen(false)}>
                         <div className="relative flex h-11 w-11 items-center justify-center rounded-md border border-neutral-200 text-black transition-colors dark:border-neutral-700 dark:text-white">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
@@ -42,150 +44,163 @@ const CartBar: FC<Props> = ({ isCartBarOpen, setIsCartBarOpen }) => {
                 </div>
                 <div className="flex h-full flex-col justify-between overflow-hidden p-1">
                     <ul className="flex-grow overflow-auto py-4">
-                        <li className="flex w-full flex-col border-b border-neutral-300 dark:border-neutral-700">
-                            <div className="relative flex w-full flex-row justify-between px-1 py-4">
-                                <div className="absolute z-40 -mt-2 ml-[55px]">
-                                    <form >
-                                        <button
-                                            type="submit"
-                                            aria-label="Remove cart item"
-                                            aria-disabled="false"
-                                            className="ease flex h-[17px] w-[17px] items-center justify-center rounded-full bg-neutral-500 transition-all duration-200"
+                        {
+                            cart.length > 0 ? cart?.map((product: any) => {
+                                return <li className="flex w-full flex-col border-b border-neutral-300 dark:border-neutral-700" key={product.id}>
+                                    <div className="relative flex w-full flex-row justify-between px-1 py-4">
+                                        <div className="absolute z-40 -mt-2 ml-[55px]">
+                                            <form >
+                                                <button
+                                                    type="submit"
+                                                    aria-label="Remove cart item"
+                                                    aria-disabled="false"
+                                                    className="ease flex h-[17px] w-[17px] items-center justify-center rounded-full bg-neutral-500 transition-all duration-200"
+                                                    onClick={() => {
+                                                        removeFromCart(product.id)
+                                                    }}
+                                                >
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        fill="none"
+                                                        viewBox="0 0 24 24"
+                                                        strokeWidth="1.5"
+                                                        stroke="currentColor"
+                                                        aria-hidden="true"
+                                                        data-slot="icon"
+                                                        className="hover:text-accent-3 mx-[1px] h-4 w-4 text-white dark:text-black"
+                                                    >
+                                                        <path
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                            d="M6 18 18 6M6 6l12 12"
+                                                        />
+                                                    </svg>
+                                                </button>
+                                                <p aria-live="polite" className="sr-only" role="status" />
+                                            </form>
+                                        </div>
+                                        <a
+                                            className="z-30 flex flex-row space-x-4"
+                                            href="/product/acme-geometric-circles-t-shirt?color=White&size=XS"
                                         >
-                                            <svg
-                                                xmlns="http://www.w3.org/2000/svg"
-                                                fill="none"
-                                                viewBox="0 0 24 24"
-                                                strokeWidth="1.5"
-                                                stroke="currentColor"
-                                                aria-hidden="true"
-                                                data-slot="icon"
-                                                className="hover:text-accent-3 mx-[1px] h-4 w-4 text-white dark:text-black"
-                                            >
-                                                <path
-                                                    strokeLinecap="round"
-                                                    strokeLinejoin="round"
-                                                    d="M6 18 18 6M6 6l12 12"
-                                                />
-                                            </svg>
-                                        </button>
-                                        <p aria-live="polite" className="sr-only" role="status" />
-                                    </form>
-                                </div>
-                                <a
-                                    className="z-30 flex flex-row space-x-4"
-                                    href="/product/acme-geometric-circles-t-shirt?color=White&size=XS"
-                                >
-                                    <div className="relative h-16 w-16 cursor-pointer overflow-hidden rounded-md border border-neutral-300 bg-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:hover:bg-neutral-800">
-                                        <img
-                                            alt="Acme Circles T-Shirt"
-                                            loading="lazy"
-                                            width={64}
-                                            height={64}
-                                            decoding="async"
-                                            data-nimg={1}
-                                            className="h-full w-full object-cover"
+                                            <div className="relative h-16 w-16 cursor-pointer overflow-hidden rounded-md border border-neutral-300 bg-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:hover:bg-neutral-800">
+                                                <img
+                                                    alt="Acme Circles T-Shirt"
+                                                    loading="lazy"
+                                                    width={64}
+                                                    height={64}
+                                                    decoding="async"
+                                                    data-nimg={1}
+                                                    className="h-full w-full object-cover"
 
-                                            src="https://static-01.daraz.com.bd/p/defb4a1f8dd811c6f099a97c90fb2c15.jpg_750x750.jpg_.webp"
-                                            style={{ color: "transparent" }}
-                                        />
+                                                    src={product.thumbnail}
+                                                    style={{ color: "transparent" }}
+                                                />
+                                            </div>
+                                            <div className="flex flex-1 flex-col text-base">
+                                                <span className="leading-tight">{product.title.substring(0, 10)}</span>
+                                                <p className="text-sm text-neutral-500 dark:text-neutral-400">
+                                                    Brand:{product.brand}
+                                                </p>
+                                            </div>
+                                        </a>
+                                        <div className="flex h-16 flex-col justify-between">
+                                            <p className="flex justify-end space-y-2 text-right text-sm">
+                                                ৳ {product.stringPrice}<span className="ml-1 inline"> BDT</span>
+                                            </p>
+                                            <div className="ml-auto flex h-9 flex-row items-center rounded-full border border-neutral-200 dark:border-neutral-700">
+                                                <div >
+                                                    <button
+
+                                                        aria-label="Reduce item quantity"
+                                                        aria-disabled="false"
+                                                        className="ease flex h-full min-w-[36px] max-w-[36px] flex-none items-center justify-center rounded-full px-2 transition-all duration-200 hover:border-neutral-800 hover:opacity-80 ml-auto"
+                                                        disabled={product.quantity > 1 ? false : true}
+                                                        onClick={() => {
+                                                            updateQuantity("decrement", product.id)
+                                                        }}
+                                                    >
+                                                        <svg
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            fill="none"
+                                                            viewBox="0 0 24 24"
+                                                            strokeWidth="1.5"
+                                                            stroke="currentColor"
+                                                            aria-hidden="true"
+                                                            data-slot="icon"
+                                                            className="h-4 w-4 dark:text-neutral-500"
+                                                        >
+                                                            <path
+                                                                strokeLinecap="round"
+                                                                strokeLinejoin="round"
+                                                                d="M5 12h14"
+                                                            />
+                                                        </svg>
+                                                    </button>
+                                                    <p aria-live="polite" className="sr-only" role="status" />
+                                                </div>
+                                                <p className="w-6 text-center">
+                                                    <span className="w-full text-sm">{product.quantity}</span>
+                                                </p>
+                                                <div>
+                                                    <button
+
+                                                        aria-label="Increase item quantity"
+                                                        aria-disabled="false"
+                                                        className="ease flex h-full min-w-[36px] max-w-[36px] flex-none items-center justify-center rounded-full px-2 transition-all duration-200 hover:border-neutral-800 hover:opacity-80"
+                                                        onClick={() => {
+                                                            updateQuantity("increment", product.id)
+                                                        }}
+                                                    >
+                                                        <svg
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            fill="none"
+                                                            viewBox="0 0 24 24"
+                                                            strokeWidth="1.5"
+                                                            stroke="currentColor"
+                                                            aria-hidden="true"
+                                                            data-slot="icon"
+                                                            className="h-4 w-4 dark:text-neutral-500"
+                                                        >
+                                                            <path
+                                                                strokeLinecap="round"
+                                                                strokeLinejoin="round"
+                                                                d="M12 4.5v15m7.5-7.5h-15"
+                                                            />
+                                                        </svg>
+                                                    </button>
+                                                    <p aria-live="polite" className="sr-only" role="status" />
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <div className="flex flex-1 flex-col text-base">
-                                        <span className="leading-tight">Acme Circles T-Shirt</span>
-                                        <p className="text-sm text-neutral-500 dark:text-neutral-400">
-                                            White / XS
-                                        </p>
-                                    </div>
-                                </a>
-                                <div className="flex h-16 flex-col justify-between">
-                                    <p className="flex justify-end space-y-2 text-right text-sm">
-                                        $15.00<span className="ml-1 inline">USD</span>
+                                </li>
+                            }) : <div className="mt-20 flex w-full flex-col items-center justify-center overflow-hidden"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" data-slot="icon" className="h-16"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z"></path></svg><p className="mt-6 text-center text-2xl font-bold">Your cart is empty.</p></div>
+                        }
+                    </ul>
+                    {
+                        cart.length > 0 && <>
+                            <div className="py-4 text-sm text-neutral-500 dark:text-neutral-400">
+                                <div className="mb-3 flex items-center justify-between border-b border-neutral-200 pb-1 dark:border-neutral-700">
+
+                                </div>
+
+                                <div className="mb-3 flex items-center justify-between border-b border-neutral-200 pb-1 pt-1 dark:border-neutral-700">
+                                    <p>Total</p>
+                                    <p className="text-right text-base text-black dark:text-white">
+                                        ৳ {totalAmount} <span className="ml-1 inline">BDT</span>
                                     </p>
-                                    <div className="ml-auto flex h-9 flex-row items-center rounded-full border border-neutral-200 dark:border-neutral-700">
-                                        <form >
-                                            <button
-                                                type="submit"
-                                                aria-label="Reduce item quantity"
-                                                aria-disabled="false"
-                                                className="ease flex h-full min-w-[36px] max-w-[36px] flex-none items-center justify-center rounded-full px-2 transition-all duration-200 hover:border-neutral-800 hover:opacity-80 ml-auto"
-                                            >
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    fill="none"
-                                                    viewBox="0 0 24 24"
-                                                    strokeWidth="1.5"
-                                                    stroke="currentColor"
-                                                    aria-hidden="true"
-                                                    data-slot="icon"
-                                                    className="h-4 w-4 dark:text-neutral-500"
-                                                >
-                                                    <path
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"
-                                                        d="M5 12h14"
-                                                    />
-                                                </svg>
-                                            </button>
-                                            <p aria-live="polite" className="sr-only" role="status" />
-                                        </form>
-                                        <p className="w-6 text-center">
-                                            <span className="w-full text-sm">1</span>
-                                        </p>
-                                        <form>
-                                            <button
-                                                type="submit"
-                                                aria-label="Increase item quantity"
-                                                aria-disabled="false"
-                                                className="ease flex h-full min-w-[36px] max-w-[36px] flex-none items-center justify-center rounded-full px-2 transition-all duration-200 hover:border-neutral-800 hover:opacity-80"
-                                            >
-                                                <svg
-                                                    xmlns="http://www.w3.org/2000/svg"
-                                                    fill="none"
-                                                    viewBox="0 0 24 24"
-                                                    strokeWidth="1.5"
-                                                    stroke="currentColor"
-                                                    aria-hidden="true"
-                                                    data-slot="icon"
-                                                    className="h-4 w-4 dark:text-neutral-500"
-                                                >
-                                                    <path
-                                                        strokeLinecap="round"
-                                                        strokeLinejoin="round"
-                                                        d="M12 4.5v15m7.5-7.5h-15"
-                                                    />
-                                                </svg>
-                                            </button>
-                                            <p aria-live="polite" className="sr-only" role="status" />
-                                        </form>
-                                    </div>
                                 </div>
                             </div>
-                        </li>
-                    </ul>
-                    <div className="py-4 text-sm text-neutral-500 dark:text-neutral-400">
-                        <div className="mb-3 flex items-center justify-between border-b border-neutral-200 pb-1 dark:border-neutral-700">
-                            <p>Taxes</p>
-                            <p className="text-right text-base text-black dark:text-white">
-                                $0.00<span className="ml-1 inline">USD</span>
-                            </p>
-                        </div>
-                        <div className="mb-3 flex items-center justify-between border-b border-neutral-200 pb-1 pt-1 dark:border-neutral-700">
-                            <p>Shipping</p>
-                            <p className="text-right">Calculated at checkout</p>
-                        </div>
-                        <div className="mb-3 flex items-center justify-between border-b border-neutral-200 pb-1 pt-1 dark:border-neutral-700">
-                            <p>Total</p>
-                            <p className="text-right text-base text-black dark:text-white">
-                                $15.00<span className="ml-1 inline">USD</span>
-                            </p>
-                        </div>
-                    </div>
-                    <a
-                        href="https://dev-vercel-shop.myshopify.com/cart/c/c1-3df8d4530e56bf4438355c121aa0c067?key=19da19cb3121caaa7b3712741c4d54cd"
-                        className="block w-full rounded-full bg-blue-600 p-3 text-center text-sm font-medium text-white opacity-90 hover:opacity-100"
-                    >
-                        Proceed to Checkout
-                    </a>
+                            <Link
+
+                                href={`${cart.length > 0 ? "/products/checkout" : "#"}`}
+                                className="block w-full rounded-full bg-blue-600 p-3 text-center text-sm font-medium text-white opacity-90 hover:opacity-100"
+                            >
+                                Proceed to Checkout
+                            </Link>
+                        </>
+                    }
                 </div>
             </div>
 

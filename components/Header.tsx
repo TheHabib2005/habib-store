@@ -1,8 +1,9 @@
 "use client"
 import Link from 'next/link'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import MobileSideBar from './MobileSideBar';
 import CartBar from './CartBar';
+import { useCartStore } from '@/zustand/useCartStore';
 
 const Header = () => {
     const [inputValue, setInputValue] = useState<string>("");
@@ -11,7 +12,10 @@ const Header = () => {
         setInputValue(e.target.value);
     }
     const [isSideBarOpen, setIsSideBarOpen] = useState<boolean>(false)
-    const [isCartBarOpen, setIsCartBarOpen] = useState<boolean>(false)
+    // const [isCartBarOpen, setIsCartBarOpen] = useState<boolean>(false)
+    const { cart, setIsCartOpen, isCartOpen } = useCartStore()
+
+
 
 
     return (
@@ -64,12 +68,12 @@ const Header = () => {
                 </div>
                 {/* cart icon */}
                 <div className='relative '
-                    onClick={() => setIsCartBarOpen(true)}
+                    onClick={() => setIsCartOpen(true)}
                 >
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className=" text-white xl:w-7 xl:h-7 w-6 h-6 cursor-pointer">
                         <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
                     </svg>
-                    <div className='absolute text-white bg-[#2563EB] w-4 h-4 rounded-full font-bold  top-[-6px] right-[-6px] text-[12px] flex items-center justify-center'>5</div>
+                    <div className='absolute text-white bg-[#2563EB] w-4 h-4 rounded-full font-bold  top-[-6px] right-[-6px] text-[12px] flex items-center justify-center'>{cart.length}</div>
                 </div>
 
                 {/* user icon */}
@@ -83,12 +87,12 @@ const Header = () => {
             </div>
             {/* mobile view right side cart icon  */}
             <div className='relative p-3 rounded-md border border-neutral-700 md:hidden block cursor-pointer'
-                onClick={() => setIsCartBarOpen(true)}
+                onClick={() => setIsCartOpen(true)}
             >
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-5 h-5 cursor-pointer">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 3h1.386c.51 0 .955.343 1.087.835l.383 1.437M7.5 14.25a3 3 0 0 0-3 3h15.75m-12.75-3h11.218c1.121-2.3 2.1-4.684 2.924-7.138a60.114 60.114 0 0 0-16.536-1.84M7.5 14.25 5.106 5.272M6 20.25a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Zm12.75 0a.75.75 0 1 1-1.5 0 .75.75 0 0 1 1.5 0Z" />
                 </svg>
-                <div className='absolute bg-[#2563EB] w-5 h-5 rounded-full font-bold  top-[-10px] right-[-6px] text-[12px] flex items-center justify-center'>5</div>
+                <div className='absolute bg-[#2563EB] w-5 h-5 rounded-full font-bold  top-[-10px] right-[-6px] text-[12px] flex items-center justify-center'>{cart.length}</div>
             </div>
 
 
@@ -101,7 +105,7 @@ const Header = () => {
             {/* mobile view side-bar */}
             <MobileSideBar isSideBarOpen={isSideBarOpen} setIsSideBarOpen={setIsSideBarOpen} />
             {/* mobile view cart-bar */}
-            <CartBar isCartBarOpen={isCartBarOpen} setIsCartBarOpen={setIsCartBarOpen} />
+            <CartBar />
 
 
         </header>
