@@ -26,7 +26,7 @@ const ProductDetails: FC<Props> = ({ productId }) => {
     const path = usePathname();
     const [isLoading, setIsLoading] = useState(false);
     const [productsData, setProductsData] = useState<ProductsTYPE>();
-    const [error, setError] = useState();
+    const [error, setError] = useState<any>();
 
     const fetchProductById = async () => {
         try {

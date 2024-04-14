@@ -7,8 +7,6 @@ export const HomeDisplayedProducts: ProductsTYPE[] = [
         title: "iphone 15 Pro Max 256GB/512GB/1TB",
         price: 174990,
         stringPrice: "174,990",
-        light_thumbnail:
-            "https://static-01.daraz.com.bd/p/defb4a1f8dd811c6f099a97c90fb2c15.jpg_300x0q75.webp",
         thumbnail:
             "/product-images/iphone-12.png",
         description:
@@ -40,6 +38,8 @@ export const HomeDisplayedProducts: ProductsTYPE[] = [
                 rating: 4.5,
             },
         ],
+        discount_parcent: 14,
+        quantity: 1
     },
     {
         id: Math.round(Math.random() * 100),
@@ -50,7 +50,6 @@ export const HomeDisplayedProducts: ProductsTYPE[] = [
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
         category: "t-shirt",
         brand: "adidas",
-        light_thumbnail: "",
         stringPrice: "",
         images: [],
         stock: Math.round(Math.random() * 30),
@@ -70,7 +69,9 @@ export const HomeDisplayedProducts: ProductsTYPE[] = [
                 comment: "this is nice phone",
                 rating: 4.5,
             }
-        ]
+        ],
+        discount_parcent: 14,
+        quantity: 1
     },
     {
         id: Math.round(Math.random() * 100),
@@ -82,7 +83,8 @@ export const HomeDisplayedProducts: ProductsTYPE[] = [
         stock: Math.round(Math.random() * 30),
         rating: Math.random() * 5,
         brand: "adidas",
-        light_thumbnail: "",
+        discount_parcent: 14,
+        quantity: 1,
         stringPrice: "",
         images: [],
         reviews: [
