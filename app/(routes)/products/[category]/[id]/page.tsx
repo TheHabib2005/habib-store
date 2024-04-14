@@ -6,7 +6,8 @@ interface Props {
         id: string
     }
 }
-const ProductDetailsPage: FC<Props> = ({ params }) => {
+const ProductDetailsPage: FC<Props> = async ({ params }) => {
+
     return (
         <section className='md:px-4 px-2'>
             <ProductDetails productId={params.id} />

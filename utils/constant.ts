@@ -21,11 +21,7 @@ export const smartPhoneBrandList: smartPhoneBrandListTYPE[] = [
     name: "oppo",
     isChecked: false,
   },
-  {
-    id: Math.round(Math.random() * 200),
-    name: "vivo",
-    isChecked: false,
-  },
+
   {
     id: Math.round(Math.random() * 200),
     name: "xioami",

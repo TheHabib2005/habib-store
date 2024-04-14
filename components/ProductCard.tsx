@@ -5,10 +5,10 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import React, { useEffect } from 'react'
 import LazyImage from './LazyImage'
+import { ProductsTYPE } from '@/constant-type'
 
-const ProductCard = () => {
+const ProductCard = ({ product }: { product: ProductsTYPE }) => {
     const currentPath = usePathname();
-
 
 
 
@@ -17,19 +17,19 @@ const ProductCard = () => {
             <div className="aspect-square transition-opacity animate-fadeIn">
                 <Link
                     className="relative inline-block h-full w-full"
-                    href={`${currentPath}/035249831056489`}
+                    href={`${currentPath}/${product._id}`}
                 >
                     <div className="group flex h-full w-full items-center justify-center overflow-hidden rounded-lg border bg-white hover:border-blue-600 dark:bg-[#252424] relative border-neutral-200 dark:border-neutral-800">
-                        <LazyImage src='https://static-01.daraz.com.bd/p/defb4a1f8dd811c6f099a97c90fb2c15.jpg_750x750.jpg_.webp' />
+                        <LazyImage src={product.thumbnail} />
                         <div className="absolute bottom-0 left-0 flex w-full px-4 pb-4 @container/label">
                             <div className="flex items-center rounded-full border bg-white/70 p-1 text-xs font-semibold text-black backdrop-blur-md dark:border-neutral-800 dark:bg-[#1D1D1D] dark:text-white">
                                 <h3 className="mr-4 line-clamp-2 flex-grow pl-2 leading-none tracking-tight">
-                                    Acme Circles T-Shirt
+                                    {product.title}
                                 </h3>
                                 <p className="flex-none rounded-full bg-blue-600 p-2 text-white">
-                                    $20.00
-                                    <span className="ml-1 inline hidden @[275px]/label:inline">
-                                        USD
+                                    $ {product.stringPrice}
+                                    <span className="ml-1 inline  @[275px]/label:inline">
+                                        BDT
                                     </span>
                                 </p>
                             </div>
@@ -37,7 +37,7 @@ const ProductCard = () => {
                     </div>
                 </Link>
             </div>
-            <div className="aspect-square transition-opacity animate-fadeIn">
+            {/* <div className="aspect-square transition-opacity animate-fadeIn">
                 <Link
                     className="relative inline-block h-full w-full"
                     href="/product/acme-geometric-circles-t-shirt"
@@ -98,7 +98,7 @@ const ProductCard = () => {
                         </div>
                     </div>
                 </Link>
-            </div>
+            </div> */}
         </>
     )
 }

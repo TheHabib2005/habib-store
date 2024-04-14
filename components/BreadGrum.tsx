@@ -11,7 +11,7 @@ const BreadGrum: FC<Props> = ({ category }) => {
 
 
     return (
-        <div className='flex items-center gap-x-3'>
+        <div className='flex items-center gap-3 flex-wrap'>
             <Link href={"/"}>Home</Link>
             {
                 breadGrum.map((bread) => <p className='flex items-center gap-x-2 capitalize' key={bread}><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" className="w-4 h-4">

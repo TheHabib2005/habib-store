@@ -38,7 +38,7 @@ export const useCartStore = create()(
           let updatedCart = [...get().cart];
           if (existingProduct) {
             updatedCart = updatedCart.map((item) => {
-              if (item.id === product.id) {
+              if (item.title === product.title) {
                 return {
                   ...item,
                   quantity: item.quantity + 1,

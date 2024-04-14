@@ -10,8 +10,9 @@ export interface ProductsTYPE {
   rating: number;
   reviews: productReviewTYPE[];
   images: string[];
-  light_thumbnail: string;
   stringPrice: string;
+  quantity: number;
+  discount_parcent: number;
 }
 export interface CartProductsTYPE {
   id: number;

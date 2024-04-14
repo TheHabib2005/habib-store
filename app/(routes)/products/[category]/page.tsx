@@ -14,7 +14,7 @@ const Category: FC<PROPS> = ({ params }) => {
                 <FilterWrapper />
 
                 {/* product bar */}
-                <ProductContainer />
+                <ProductContainer category={params.category} />
             </div>
         </section>
     );
