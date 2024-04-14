@@ -14,7 +14,7 @@ interface Props {
 }
 const ProductDetails: FC<Props> = ({ productId }) => {
 
-    const [currentProduct, setCurrentProduct] = useState<ProductsTYPE>({});
+    const [currentProduct, setCurrentProduct] = useState<any>();
     const { addToCart, cart, removeFromCart, updateQuantity } = useCartStore()
     const isProudctInCart = () => {
         return cart.find((item: any) => item.id === currentProduct.id)
