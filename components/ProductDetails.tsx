@@ -32,7 +32,7 @@ const ProductDetails: FC<Props> = ({ productId }) => {
     const fetchProductById = async () => {
         try {
             setIsLoading(true);
-            const response = await axiosInstance.post('/api/products/singleProduct/', JSON.stringify(productId))
+            const response = await axiosInstance.post(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products/singleProduct/`, JSON.stringify(productId))
 
             setCurrentProduct(response.data[0])
             setIsLoading(false);
