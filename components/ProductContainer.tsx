@@ -8,7 +8,7 @@ import ProductCard from './ProductCard'
 const ProductContainer = () => {
     return (
         <div className="md:w-[75%] w-full bg-[#1d1d1d] h-auto p-4">
-            <header className="flex items-center justify-between pb-3">
+            <header className="sm:flex items-center justify-between pb-3">
                 <BreadGrum />
                 <SelectSort />
             </header>

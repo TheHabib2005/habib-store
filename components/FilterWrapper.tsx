@@ -20,7 +20,7 @@ const FilterWrapper = () => {
 
                     setTimeout(() => {
                         window.location.reload()
-                    }, 100)
+                    }, 200)
                 }}>CLEAR ALL</button>
             </div>
             <BrandLists />

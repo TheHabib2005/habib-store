@@ -15,8 +15,8 @@ const ProductDetails: FC<Props> = (productId) => {
     const [quantity, setQuantity] = useState(1)
     const router = useRouter()
     return (
-        <div className='md:flex block gap-x-4'>
-            <div className='w-[40%] p-2'>
+        <div className='lg:flex block gap-x-4'>
+            <div className='lg:w-[40%] p-2'>
                 <div className=' md:hidden block mb-5  '><BreadGrum category={currentProduct.category} /></div>
 
                 <div className='w-full '>
@@ -47,7 +47,7 @@ const ProductDetails: FC<Props> = (productId) => {
                     }
                 </div>
             </div>
-            <div className='w-[60%] '>
+            <div className='lg:w-[60%] '>
                 <div className='p-3 md:block hidden'><BreadGrum category={currentProduct.category} /></div>
                 <div className='p-3 flex flex-col gap-y-3'>
                     <h1 className='text-xl capitalize font-semibold leading-[30px]'>{currentProduct.title}</h1>
@@ -82,6 +82,9 @@ const ProductDetails: FC<Props> = (productId) => {
                         <button className='w-[170px] bg-[#2562E7] p-3 rounded-sm capitalize'>add to cart</button>
                         <button className='w-[170px] bg-[#D0611E] p-3 rounded-sm capitalize'>buy now</button>
 
+                    </div>
+                    <div>
+                        <p>{currentProduct.description}</p>
                     </div>
 
                 </div>

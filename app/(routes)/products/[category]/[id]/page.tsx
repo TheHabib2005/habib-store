@@ -8,7 +8,7 @@ interface Props {
 }
 const ProductDetailsPage: FC<Props> = ({ params }) => {
     return (
-        <section className='px-4'>
+        <section className='md:px-4 px-2'>
             <ProductDetails productId={params.id} />
         </section>
     )
