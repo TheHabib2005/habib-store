@@ -1,7 +1,7 @@
 import { CartProductsTYPE, ProductsTYPE } from "@/constant-type";
 import { create } from "zustand";
 import { devtools, persist } from "zustand/middleware";
-
+import toast from "react-hot-toast";
 // export const useCounterStore = create()(
 //   devtools(
 //     persist(
@@ -62,6 +62,7 @@ export const useCartStore = create()(
               0
             ),
           });
+          toast.success("Product added to cart");
         },
         removeFromCart: (id) => {
           let updatedCart = [...get().cart].filter((c) => c.id !== id);
@@ -72,6 +73,8 @@ export const useCartStore = create()(
               0
             ),
           });
+          toast.success("Product removed to cart");
+
         },
         updateQuantity: (type, id) => {
           let updatedCart = [...get().cart];
@@ -101,6 +104,7 @@ export const useCartStore = create()(
               0
             ),
           });
+   
         },
         // updateAmount: () => {
         //   let updateAmount = [...get().cart];

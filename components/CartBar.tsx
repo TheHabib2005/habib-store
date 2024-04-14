@@ -1,5 +1,6 @@
 "use client"
 import { useCartStore } from '@/zustand/useCartStore';
+import Image from 'next/image';
 import Link from 'next/link';
 import React, { FC, useEffect } from 'react'
 
@@ -79,22 +80,21 @@ const CartBar: FC = () => {
                                                 <p aria-live="polite" className="sr-only" role="status" />
                                             </form>
                                         </div>
-                                        <a
+                                        <Link
                                             className="z-30 flex flex-row space-x-4"
-                                            href="/product/acme-geometric-circles-t-shirt?color=White&size=XS"
+                                            href={`/products/${product.category}/${product.id}`}
                                         >
                                             <div className="relative h-16 w-16 cursor-pointer overflow-hidden rounded-md border border-neutral-300 bg-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:hover:bg-neutral-800">
-                                                <img
+                                                <Image
                                                     alt="Acme Circles T-Shirt"
-                                                    loading="lazy"
+
                                                     width={64}
                                                     height={64}
-                                                    decoding="async"
-                                                    data-nimg={1}
+
                                                     className="h-full w-full object-cover"
 
                                                     src={product.thumbnail}
-                                                    style={{ color: "transparent" }}
+
                                                 />
                                             </div>
                                             <div className="flex flex-1 flex-col text-base">
@@ -103,7 +103,7 @@ const CartBar: FC = () => {
                                                     Brand:{product.brand}
                                                 </p>
                                             </div>
-                                        </a>
+                                        </Link>
                                         <div className="flex h-16 flex-col justify-between">
                                             <p className="flex justify-end space-y-2 text-right text-sm">
                                                 ৳ {product.stringPrice}<span className="ml-1 inline"> BDT</span>

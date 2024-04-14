@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import React from 'react'
 
 const Checkout = () => {
@@ -90,10 +91,12 @@ const Checkout = () => {
                     </p>
                     <div className="mt-8 space-y-3 rounded-lg border bg-[#171717] px-2 py-4 sm:px-6">
                         <div className="flex flex-col rounded-lg bg-[#171717] sm:flex-row">
-                            <img
+                            <Image
                                 className="m-2 h-24 w-28 rounded-md border object-cover object-center"
                                 src="https://images.unsplash.com/flagged/photo-1556637640-2c80d3201be8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8c25lYWtlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
                                 alt=""
+                                width={112}
+                                height={96}
                             />
                             <div className="flex w-full flex-col px-4 py-4">
                                 <span className="font-semibold">
@@ -104,10 +107,12 @@ const Checkout = () => {
                             </div>
                         </div>
                         <div className="flex flex-col rounded-lg bg-[#171717] sm:flex-row">
-                            <img
+                            <Image
                                 className="m-2 h-24 w-28 rounded-md border object-cover object-center"
                                 src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8c25lYWtlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60"
                                 alt=""
+                                width={112}
+                                height={96}
                             />
                             <div className="flex w-full flex-col px-4 py-4">
                                 <span className="font-semibold">
@@ -133,10 +138,12 @@ const Checkout = () => {
                                 className="peer-checked:border-2 peer-checked:border-gray-700 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
                                 htmlFor="radio_1"
                             >
-                                <img
+                                <Image
                                     className="w-14 object-contain"
                                     src="/naorrAeygcJzX0SyNI4Y0.png"
                                     alt=""
+                                    width={112}
+                                    height={96}
                                 />
                                 <div className="ml-5">
                                     <span className="mt-2 font-semibold">Fedex Delivery</span>
@@ -159,10 +166,12 @@ const Checkout = () => {
                                 className="peer-checked:border-2 peer-checked:border-gray-700 peer-checked:bg-gray-50 flex cursor-pointer select-none rounded-lg border border-gray-300 p-4"
                                 htmlFor="radio_2"
                             >
-                                <img
+                                <Image
                                     className="w-14 object-contain"
                                     src="/oG8xsl3xsOkwkMsrLGKM4.png"
                                     alt=""
+                                    width={112}
+                                    height={96}
                                 />
                                 <div className="ml-5">
                                     <span className="mt-2 font-semibold">Fedex Delivery</span>
@@ -297,7 +306,9 @@ const Checkout = () => {
                                     placeholder="Street Address"
                                 />
                                 <div className="pointer-events-none absolute inset-y-0 left-0 inline-flex items-center px-3">
-                                    <img
+                                    <Image
+                                        width={112}
+                                        height={96}
                                         className="h-4 w-4 object-contain"
                                         src="https://flagpack.xyz/_nuxt/4c829b6c0131de7162790d2f897a90fd.svg"
                                         alt=""

@@ -5,10 +5,13 @@ import { useRouter } from 'next/navigation'
 import React, { FC, useEffect, useState } from 'react'
 import BreadGrum from './BreadGrum'
 import { useCartStore } from '@/zustand/useCartStore'
+
+
 interface Props {
     productId: string
 }
 const ProductDetails: FC<Props> = (productId) => {
+
     const [currentProduct] = useState(ProductsApi[0]);
     const { addToCart, cart, removeFromCart, updateQuantity } = useCartStore()
     const isProudctInCart = () => {
@@ -114,11 +117,12 @@ const ProductDetails: FC<Props> = (productId) => {
                             >remove from CART </button> : <button className='w-[170px] bg-[#2562E7] p-3 rounded-sm capitalize'
                                 onClick={() => {
                                     addToCart({ ...currentProduct, quantity: quantity })
+
                                 }}
                             >add to cart</button>
                         }
 
-                        <button className='w-[170px] bg-[#D0611E] p-3 rounded-sm capitalize'>buy now</button>
+                        {/* <button className='w-[170px] bg-[#D0611E] p-3 rounded-sm capitalize'>buy now</button> */}
 
                     </div>
                     <div>
