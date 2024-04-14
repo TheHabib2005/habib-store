@@ -6,7 +6,7 @@ import React, { FC, useEffect, useState } from 'react'
 import BreadGrum from './BreadGrum'
 import { useCartStore } from '@/zustand/useCartStore'
 import { ProductsTYPE } from '@/constant-type'
-import Loading from './Loading'
+import axios from 'axios'
 
 
 interface Props {
@@ -14,35 +14,28 @@ interface Props {
 }
 const ProductDetails: FC<Props> = ({ productId }) => {
 
-    const [currentProduct, setCurrentProduct] = useState<any>();
+    const [currentProduct, setCurrentProduct] = useState<any>([]);
     const { addToCart, cart, removeFromCart, updateQuantity } = useCartStore()
     const isProudctInCart = () => {
         return cart.find((item: any) => item.id === currentProduct.id)
     }
     const [currentDisplayimage, setCurrentDisplayImage] = useState(currentProduct.thumbnail)
-    const [currentDisplayimageActive, setCurrentDisplayImageActive] = useState(0)
+    const [currentDisplayimageActive, setCurrentDisplayImageActive] = useState(1)
     const [quantity, setQuantity] = useState(1)
     const router = useRouter();
     const path = usePathname();
     const [isLoading, setIsLoading] = useState(false);
-    const [productsData, setProductsData] = useState<ProductsTYPE>();
+
     const [error, setError] = useState<any>();
 
     const fetchProductById = async () => {
         try {
             setIsLoading(true);
-            const response = await fetch('http://localhost:3000/api/products/singleProduct/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(productId)
-            });
-            const data = await response.json();
+            const response = await axios.post('/api/products/singleProduct/', JSON.stringify(productId))
 
-            setCurrentProduct(data[0])
-            setCurrentDisplayImage(currentProduct.thumbnail)
+            setCurrentProduct(response.data[0])
             setIsLoading(false);
+            setCurrentDisplayImage(response.data[0].thumbnail)
         } catch (error) {
             setIsLoading(false);
             setError(error)
@@ -56,7 +49,7 @@ const ProductDetails: FC<Props> = ({ productId }) => {
 
     return (
         <div className='lg:flex block gap-x-4'>
-            {isLoading ? <Loading /> :
+            {isLoading ? "Loading" :
                 <>
                     <div className='lg:w-[40%] p-2'>
                         <div className=' md:hidden block mb-5  '><BreadGrum category={currentProduct.category} /></div>
@@ -65,7 +58,7 @@ const ProductDetails: FC<Props> = ({ productId }) => {
                             {/* <button onClick={() => router.back()}>back</button> */}
                             <Image
                                 className='rounded-sm '
-                                src={currentDisplayimage || currentProduct.thumbnail}
+                                src={currentDisplayimage}
                                 width={5000000}
                                 height={5000000}
                                 alt=''
