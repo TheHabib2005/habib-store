@@ -7,6 +7,7 @@ import BreadGrum from './BreadGrum'
 import { useCartStore } from '@/zustand/useCartStore'
 import { ProductsTYPE } from '@/constant-type'
 import axios from 'axios'
+import { axiosInstance } from '@/helpers'
 
 
 interface Props {
@@ -31,7 +32,7 @@ const ProductDetails: FC<Props> = ({ productId }) => {
     const fetchProductById = async () => {
         try {
             setIsLoading(true);
-            const response = await axios.post('/api/products/singleProduct/', JSON.stringify(productId))
+            const response = await axiosInstance.post('/api/products/singleProduct/', JSON.stringify(productId))
 
             setCurrentProduct(response.data[0])
             setIsLoading(false);

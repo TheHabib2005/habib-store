@@ -1,4 +1,5 @@
 import { ProductsTYPE } from '@/constant-type';
+import { axiosInstance } from '@/helpers';
 import axios from 'axios';
 import { useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
@@ -41,7 +42,7 @@ const FetchProducts = (category?: string) => {
     const fetchApi = async () => {
         try {
             setIsLoading(true);
-            const response = await axios.post('/api/products', { query, sort });
+            const response = await axiosInstance.post('/api/products', { query, sort });
 
             setApiResponse(response.data);
             setProductsData(response.data.data)
