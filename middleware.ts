@@ -11,11 +11,10 @@ export const middleware = async (request: NextRequest) => {
 
   // if (!token) {
   //   // console.log(request.nextUrl);
-  //   console.log(NextResponse.redirect(new URL("/signup", request.nextUrl)));
+  //   // console.log(NextResponse.redirect(new URL("/signup", request.nextUrl)));
 
-  // return NextResponse.redirect(new URL("/signup", request.nextUrl));
+  //   return NextResponse.redirect(new URL("/signin", request.nextUrl));
   // }
-  // return NextResponse.redirect("http://localhost:3000/signup");
 };
 
 export const config = {

@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Roboto_Mono } from "next/font/google";
 import "../../app/globals.css";
+import { Toaster } from "react-hot-toast";
 
 
 const inter = Roboto_Mono({ subsets: ["latin"] });
@@ -19,9 +20,29 @@ export default function AuthLayout({
   return (
     <html lang="en">
       <head>{/* <link rel="icon" href="./favicon.ico" /> */}</head>
-      <body className={inter.className}>
-        {children}
+      <body className={inter.className + "bg-primary dark"}>
+        <Toaster
+          position="top-center"
+          reverseOrder={false}
+          gutter={8}
+          containerClassName=""
+          containerStyle={{}}
+          toastOptions={{
+            // Define default options
+            className: '',
+            duration: 3000,
+            style: {
+              background: '#363636',
+              color: '#fff',
+            },
 
+            // Default options for specific types
+            success: {
+              duration: 3000,
+            },
+          }}
+        />
+        {children}
       </body>
     </html>
   );

@@ -8,7 +8,7 @@ export const smartPhoneBrandList: smartPhoneBrandListTYPE[] = [
   },
   {
     id: Math.round(Math.random() * 200),
-    name: "sumsung",
+    name: "samsung",
     isChecked: false,
   },
   {
