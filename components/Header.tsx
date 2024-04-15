@@ -4,17 +4,41 @@ import React, { useEffect, useState } from 'react'
 import MobileSideBar from './MobileSideBar';
 import CartBar from './CartBar';
 import { useCartStore } from '@/zustand/useCartStore';
+import { delay } from '@/helpers';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 const Header = () => {
-    const [inputValue, setInputValue] = useState<string>("");
+    const searchParams = useSearchParams();
+    const params = new URLSearchParams(searchParams);
+    const path = usePathname();
+    const router = useRouter();
+    const [inputValue, setInputValue] = useState<string>(params.get("q") || "");
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         setInputValue(e.target.value);
+        if (e.target.value.length > 0) {
+            return
+        } else {
+            params.delete("q")
+            router.replace(`${path}?${params}`)
+
+        }
     }
     const [isSideBarOpen, setIsSideBarOpen] = useState<boolean>(false)
     // const [isCartBarOpen, setIsCartBarOpen] = useState<boolean>(false)
     const { cart, setIsCartOpen, isCartOpen } = useCartStore()
 
+    const handleSubmit = async (event: any) => {
+        event.preventDefault()
+        await delay(1000);
+        if (inputValue.length > 0) {
+            params.set("q", inputValue)
+        } else {
+            params.delete("q")
+        }
+        router.replace(`${path}?${params}`)
+
+    }
 
 
 
@@ -39,7 +63,7 @@ const Header = () => {
                 </div>
             </div>
             {/* search box */}
-            <form className='w-1/3 relative md:block hidden'>
+            <form className='w-1/3 relative md:block hidden' onSubmit={handleSubmit}>
                 <input type="text"
                     placeholder='Search for products...'
                     className='text-white p-[8px] px-3 rounded-md bg-transparent border border-neutral-700 focus:border-neutral-500 outline-none min-w-full placeholder:text-neutral-400 placeholder:text-sm'
@@ -47,7 +71,11 @@ const Header = () => {
                     value={inputValue}
                 />
                 {inputValue.length > 0 ? <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-4 h-4 absolute right-3 top-[30%] text-white cursor-pointer"
-                    onClick={() => setInputValue("")}
+                    onClick={() => {
+                        setInputValue("")
+                        params.delete("q")
+                        router.replace(`${path}?${params}`)
+                    }}
                 >
                     <path d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z" />
                 </svg>

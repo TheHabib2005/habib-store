@@ -35,7 +35,7 @@ const ProductDetails: FC<Props> = ({ productId }) => {
     const fetchProductById = async () => {
         try {
             setIsLoading(true);
-            const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/products/singleProduct/`, {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/api/products/singleProduct/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

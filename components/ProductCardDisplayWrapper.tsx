@@ -31,6 +31,11 @@ const ProductCardDisplayWrapper: FC<PROPS> = ({ category }) => {
                     return <ProductCard key={product.id} product={product} />
                 })
             }
+            {
+                productsData.length === 0 && !isLoading ? <div className="flex flex-col justify-center items-center">
+                    <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">No Products Found</h1>
+                </div> : null
+            }
         </>
     )
 }

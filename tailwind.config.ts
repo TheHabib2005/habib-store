@@ -20,6 +20,7 @@ const config = {
     extend: {
       backgroundColor: {
         primary: "#171717",
+        secendery: "#252424",
       },
       colors: {
         border: "hsl(var(--border))",

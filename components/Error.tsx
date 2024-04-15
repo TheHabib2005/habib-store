@@ -1,8 +1,19 @@
-import React from 'react'
+"use client"
+import FetchProducts from '@/hooks/useFetchProducts'
+import React, { useEffect, useState } from 'react'
 
 const Error = () => {
+    const { error } = FetchProducts()
+    const [data, setData] = useState()
+
+    useEffect(() => {
+        if (error) {
+            setData(error)
+        }
+    }, [])
+
     return (
-        <div>something want to wrong! || fetching api is failled</div>
+        <div>error</div>
     )
 }
 

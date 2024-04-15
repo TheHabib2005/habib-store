@@ -5,6 +5,7 @@ const nextConfig = {
       "rukminim2.flixcart.com",
       "static-01.daraz.com.bd",
       "encrypted-tbn0.gstatic.com",
+      "svgrepo.com"
     ],
   },
 };

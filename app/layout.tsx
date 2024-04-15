@@ -15,6 +15,9 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  if (!process.env.NEXT_PUBLIC_BASE_API_URL) {
+    return null
+  }
   return (
     <html lang="en">
       <body className={`${inter.className} dark bg-primary`}>
