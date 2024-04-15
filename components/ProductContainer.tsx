@@ -6,6 +6,9 @@ import ProductCard from './ProductCard'
 import ProductCardDisplayWrapper from './ProductCardDisplayWrapper'
 
 import MobileFilterBar from './MobileFilterBar'
+import FetchProducts from '@/hooks/useFetchProducts'
+import Loading from './Loading'
+import Error from './Error'
 interface PROPS {
 
     category: string;
@@ -13,9 +16,8 @@ interface PROPS {
 }
 const ProductContainer: FC<PROPS> = ({ category }) => {
 
-
     return (
-        <div className="md:w-[75%] w-full bg-[#1d1d1d] h-auto p-4">
+        <div className="md:w-[75%] w-full bg-[#1d1d1d] h-auto p-4 relative">
             <header className="md:flex items-center justify-between pb-3">
                 <BreadGrum />
                 <div className='flex items-center justify-between mt-4'>

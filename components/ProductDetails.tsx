@@ -7,7 +7,10 @@ import BreadGrum from './BreadGrum'
 import { useCartStore } from '@/zustand/useCartStore'
 import { ProductsTYPE } from '@/constant-type'
 import axios from 'axios'
-import { axiosInstance } from '@/helpers'
+import { axiosInstance, delay } from '@/helpers'
+import { ProductSkelecttion } from './ProductSkelectionLoader'
+import { Skeleton } from './ui/skeleton'
+import ProductDeatilsSkelection from './ProductDeatilsSkelection'
 
 
 interface Props {
@@ -56,7 +59,7 @@ const ProductDetails: FC<Props> = ({ productId }) => {
 
     return (
         <div className='lg:flex block gap-x-4'>
-            {isLoading ? "Loading" :
+            {isLoading ? <ProductDeatilsSkelection /> :
                 <>
                     <div className='lg:w-[40%] p-2'>
                         <div className=' md:hidden block mb-5  '><BreadGrum category={currentProduct.category} /></div>

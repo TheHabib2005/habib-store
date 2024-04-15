@@ -1,5 +1,6 @@
+import Loading from '@/components/Loading';
 import { ProductsTYPE } from '@/constant-type';
-import { axiosInstance } from '@/helpers';
+import { axiosInstance, delay } from '@/helpers';
 import axios from 'axios';
 import { useSearchParams } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
@@ -53,6 +54,7 @@ const FetchProducts = (category?: string) => {
             const data = await response.json();
             setApiResponse(data);
             setProductsData(data.data)
+            await delay(5000)
             setIsLoading(false);
         } catch (error) {
             setIsLoading(false);

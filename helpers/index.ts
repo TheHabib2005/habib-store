@@ -6,3 +6,6 @@ export const axiosInstance = axios.create({
     "Content-Type": "application/json", // Set the content type header
   },
 });
+
+export const delay = async (time: number) =>
+  new Promise((resolve, reject) => setTimeout(resolve, time));
