@@ -49,7 +49,11 @@ const FetchProducts = (category?: string) => {
     const fetchApi = async () => {
         try {
             setIsLoading(true);
+<<<<<<< HEAD
             const response = await fetch(`${process.env.NEXT_PUBLIC_BASE_API_URL}/api/products/`, {
+=======
+   const response = await fetch('api/products/', {
+>>>>>>> 3cf48ea4d99050d0586b247b3fc623eea895a5fb
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'
