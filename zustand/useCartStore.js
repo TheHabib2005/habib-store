@@ -76,25 +76,41 @@ export const useCartStore = create()(
           toast.success("Product removed to cart");
 
         },
-        updateQuantity: (type, id) => {
+        incrementQuantity: (id) => {
           let updatedCart = [...get().cart];
-
           updatedCart = updatedCart.map((product) => {
-            if (type === "increment") {
-              if (product.id === id) {
+              if (product._id === id) {
                 return {
                   ...product,
                   quantity: product.quantity + 1,
                 };
+              }else{
+                return product
               }
-            } else {
-              if (product.id === id) {
+
+          });
+
+          set({ cart: updatedCart });
+          set({
+            totalAmount: updatedCart.reduce(
+              (acc, item) => acc + item.quantity * item.price,
+              0
+            ),
+          });
+   
+        },
+        decrementQuantity: (id) => {
+          let updatedCart = [...get().cart];
+          updatedCart = updatedCart.map((product) => {
+              if (product._id === id) {
                 return {
                   ...product,
-                  quantity: product.quantity - 1,
+                  quantity: product.quantity > 1 && product.quantity - 1,
                 };
+              }else{
+                return product
               }
-            }
+
           });
 
           set({ cart: updatedCart });

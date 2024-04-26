@@ -110,7 +110,7 @@ const ProductDetails: FC<Props> = ({ productId }) => {
 
                             <p className='text-2xl text-[#2562E7] font-semibold'>৳ {currentProduct.stringPrice}</p>
 
-                            <div className='flex items-center gap-x-8'>
+                            {/* <div className='flex items-center gap-x-8'>
                                 <span>Quantity</span>
                                 <div className='flex items-center gap-x-8'>
                                     <button className='w-[40px] h-[40px] flex items-center justify-center text-lg font-semibold rounded-sm cursor-pointer bg-[#1D1D1D] disabled:cursor-default  disabled:bg-gray-400'
@@ -125,11 +125,11 @@ const ProductDetails: FC<Props> = ({ productId }) => {
                                     <button className='w-[40px] h-[40px] flex items-center justify-center text-lg font-semibold rounded-sm cursor-pointer bg-[#1D1D1D] '
                                         onClick={() => {
                                             setQuantity(prev => prev + 1)
-                                            updateQuantity("increment", currentProduct.id)
+                                            incrementQuantity(currentProduct.id)
                                         }}
                                     >+</button>
                                 </div>
-                            </div>
+                            </div> */}
 
                             <div className='flex  gap-x-10 items-center relative mt-5'>
                                 {/* <button className='w-[170px] bg-[#2562E7] p-3 rounded-sm capitalize'

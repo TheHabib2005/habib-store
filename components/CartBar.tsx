@@ -6,7 +6,7 @@ import React, { FC, useEffect } from 'react'
 
 
 const CartBar: FC = () => {
-    const { cart, setIsCartOpen, totalAmount, isCartOpen, removeFromCart, updateQuantity } = useCartStore()
+    const { cart, setIsCartOpen, totalAmount, isCartOpen, removeFromCart, incrementQuantity, decrementQuantity } = useCartStore()
     useEffect(() => {
         setIsCartOpen(false)
     }, [])
@@ -50,7 +50,7 @@ const CartBar: FC = () => {
                                 return <li className="flex w-full flex-col border-b border-neutral-300 dark:border-neutral-700" key={product.id}>
                                     <div className="relative flex w-full flex-row justify-between px-1 py-4">
                                         <div className="absolute z-40 -mt-2 ml-[55px]">
-                                            <form >
+                                            <div >
                                                 <button
                                                     type="submit"
                                                     aria-label="Remove cart item"
@@ -78,7 +78,7 @@ const CartBar: FC = () => {
                                                     </svg>
                                                 </button>
                                                 <p aria-live="polite" className="sr-only" role="status" />
-                                            </form>
+                                            </div>
                                         </div>
                                         <Link
                                             className="z-30 flex flex-row space-x-4"
@@ -117,7 +117,7 @@ const CartBar: FC = () => {
                                                         className="ease flex h-full min-w-[36px] max-w-[36px] flex-none items-center justify-center rounded-full px-2 transition-all duration-200 hover:border-neutral-800 hover:opacity-80 ml-auto"
                                                         disabled={product.quantity > 1 ? false : true}
                                                         onClick={() => {
-                                                            updateQuantity("decrement", product.id)
+                                                            decrementQuantity(product._id)
                                                         }}
                                                     >
                                                         <svg
@@ -145,11 +145,11 @@ const CartBar: FC = () => {
                                                 <div>
                                                     <button
 
-                                                        aria-label="Increase item quantity"
-                                                        aria-disabled="false"
+
                                                         className="ease flex h-full min-w-[36px] max-w-[36px] flex-none items-center justify-center rounded-full px-2 transition-all duration-200 hover:border-neutral-800 hover:opacity-80"
                                                         onClick={() => {
-                                                            updateQuantity("increment", product.id)
+                                                            alert(product._id)
+                                                            incrementQuantity(product._id)
                                                         }}
                                                     >
                                                         <svg

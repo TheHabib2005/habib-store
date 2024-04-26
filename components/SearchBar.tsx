@@ -45,8 +45,23 @@ const SearchBar = () => {
             id: 9,
             name: "gedgets"
         },
+        {
+            id: 10,
+            name: "watch for man"
+        }, {
+            id: 11,
+            name: "watch for woman"
+
+        }, {
+            id: 12,
+            name: "watch for child"
+
+        }
     ]);
     const [filterData, setFilterData] = useState(data)
+
+
+
 
     const handleInputClick = (e: any) => {
         if (e.target.value) {
@@ -86,7 +101,10 @@ const SearchBar = () => {
 
     }
 
-    const handleKeyDown = (event: KeyboardEvent) => {
+    const handleKeyDown = (event: KeyboardEventHandler<HTMLInputElement>) => {
+
+        let index = currentActiveSearchItemIndex
+
         if (event.key === "ArrowUp" || event.key === "ArrowDown" || event.key === "Enter") {
 
             if (searchBoxOpen) {
@@ -95,6 +113,10 @@ const SearchBar = () => {
                 handleRecentSearchBoxKeyDown(event)
             }
 
+
+
+
+
         }
     }
 
@@ -102,6 +124,8 @@ const SearchBar = () => {
         let updateCuurentIndex = currentActiveSearchItemIndex
         if (event.key === "ArrowDown") {
             currentActiveSearchItemIndex < filterData.length - 1 ? setcurrentActiveSearchItemIndex(prev => prev + 1) : setcurrentActiveSearchItemIndex(0)
+            console.log(updateCuurentIndex);
+
         }
 
         else if (event.key === "Enter") {
@@ -121,12 +145,16 @@ const SearchBar = () => {
                     value: inputValue,
                     createAt: new Date().getTime()
                 })
+
             }
         }
 
         else {
-            updateCuurentIndex > 0 ? setcurrentActiveSearchItemIndex(prev => prev - 1) : setcurrentActiveSearchItemIndex(filterData.length - 1)
+            updateCuurentIndex > 0 ? setcurrentActiveSearchItemIndex(prev => prev - 1) : setcurrentActiveSearchItemIndex(filterData.length - 1);
+
+
         }
+
     }
 
     const handleRecentSearchBoxKeyDown = (event: KeyboardEvent) => {
@@ -141,10 +169,14 @@ const SearchBar = () => {
                 return item.name.toLowerCase().includes(inputValue.toLowerCase())
             }))
             setcurrentActiveSearchItemIndex(0)
+        } else {
+            setcurrentActiveSearchItemIndex(-1)
+
         }
 
 
     }, [])
+
 
 
 
@@ -153,8 +185,6 @@ const SearchBar = () => {
             className="w-1/3 relative md:block hidden"
             onSubmit={(e) => {
                 e.preventDefault();
-                // params.set("q", inputValue);
-                // router.replace(`${path}?${params}`)
             }}
         >
             <input
@@ -171,7 +201,8 @@ const SearchBar = () => {
                     xmlns="http://www.w3.org/2000/svg"
                     viewBox="0 0 20 20"
                     fill="currentColor"
-                    onClick={() => {
+                    onClick={(e) => {
+
                         setInputValue("");
                         setRecentBoxOpen(true);
                         setSearchBoxOpen(false);
@@ -209,7 +240,7 @@ const SearchBar = () => {
                                 onClick={() => {
                                     handleSearchItemClick({ name: item.name, id: item.id, index })
                                 }}
-                                key={item.id} className={` ${currentActiveSearchItemIndex === index ? "bg-blue-600 hover:bg-blue-600" : "bg-[#2c2b2b] hover:bg-primary"} p-3  text-white rounded-md cursor-pointer w-full flex items-center justify-between   `}><span>{item.name} {index}</span>
+                                key={item.id} className={` ${currentActiveSearchItemIndex === index ? "bg-blue-600 hover:bg-blue-600" : "bg-[#2c2b2b] hover:bg-primary"} p-3  text-white rounded-md cursor-pointer w-full flex items-center justify-between   `}><span>{item.name}</span>
                             </div>
                         ))
                     }
@@ -221,13 +252,20 @@ const SearchBar = () => {
                 <div className="absolute z-50 top-[100%] left-0 w-full p-3 mt-3 bg-[#252424] rounded-md flex flex-col gap-y-3 items-start justify-start">
                     {
                         recentSearch.map((item, index) => {
-                            return <div key={item.value} className="p-3 bg-[#313030] text-white rounded-md cursor-pointer w-full flex items-center justify-between "><span>{item.value}</span>
+                            return <div key={item.value}
+                                onClick={(e) => {
+
+                                    handleSearchItemClick({ name: item.value, index })
+                                    setRecentBoxOpen(false)
+                                }}
+                                className="p-3 bg-[#313030] text-white rounded-md cursor-pointer w-full flex items-center justify-between "><span>{item.value}</span>
                                 <svg
                                     xmlns="http://www.w3.org/2000/svg"
                                     viewBox="0 0 20 20"
                                     fill="currentColor"
                                     className="w-5 h-5"
-                                    onClick={() => {
+                                    onClick={(e) => {
+                                        e.stopPropagation()
                                         removeSerchHistry(index)
                                     }}
                                 >
