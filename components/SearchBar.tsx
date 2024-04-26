@@ -101,7 +101,7 @@ const SearchBar = () => {
 
     }
 
-    const handleKeyDown = (event: KeyboardEventHandler<HTMLInputElement>) => {
+    const handleKeyDown = (event: any) => {
 
         let index = currentActiveSearchItemIndex
 
@@ -120,7 +120,7 @@ const SearchBar = () => {
         }
     }
 
-    const handleSearchBoxKeyDown = (event: KeyboardEvent) => {
+    const handleSearchBoxKeyDown = (event: any) => {
         let updateCuurentIndex = currentActiveSearchItemIndex
         if (event.key === "ArrowDown") {
             currentActiveSearchItemIndex < filterData.length - 1 ? setcurrentActiveSearchItemIndex(prev => prev + 1) : setcurrentActiveSearchItemIndex(0)
@@ -251,7 +251,7 @@ const SearchBar = () => {
             {recentBoxOpen && recentSearch.length > 0 && (
                 <div className="absolute z-50 top-[100%] left-0 w-full p-3 mt-3 bg-[#252424] rounded-md flex flex-col gap-y-3 items-start justify-start">
                     {
-                        recentSearch.map((item, index) => {
+                        recentSearch.map((item: any, index: number) => {
                             return <div key={item.value}
                                 onClick={(e) => {
 
